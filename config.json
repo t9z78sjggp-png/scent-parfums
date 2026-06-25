@@ -1,0 +1,137 @@
+const CONFIG = "config.json";
+const PRODUCTOS = "productos.json";
+let config = {};
+let perfumes = [];
+let categoriaActual = "Todos";
+let sexoActual = "";
+let carrito = [];
+const contenedor = document.getElementById("productos");
+const buscador = document.getElementById("buscar");
+const marcaSelect = document.getElementById("marca");
+async function iniciar() {
+    config = await fetch(CONFIG).then(r => r.json());
+    perfumes = await fetch(PRODUCTOS).then(r => r.json());
+    aplicarConfig();
+    cargarMarcas();
+    renderizar();
+}
+function aplicarConfig() {
+    document.documentElement.style.setProperty("--primary", config.colores.primario);
+    document.documentElement.style.setProperty("--secondary", config.colores.secundario);
+    document.documentElement.style.setProperty("--background", config.fondo);
+    document.documentElement.style.setProperty("--imgWidth", config.imagenes.ancho);
+    document.documentElement.style.setProperty("--imgHeight", config.imagenes.alto);
+    document.getElementById("logo").src = config.logo;
+}
+function cargarMarcas() {
+    const marcas = [...new Set(perfumes.map(p => p.marca))].sort();
+    marcas.forEach(m => {
+        const option = document.createElement("option");
+        option.value = m;
+        option.textContent = m;
+        marcaSelect.appendChild(option);
+    });
+}
+function renderizar() {
+    contenedor.innerHTML = "";
+    let lista = perfumes.filter(p => {
+        if (categoriaActual !== "Todos") {
+            if (p.categoria !== categoriaActual) return false;
+        }
+        if (sexoActual !== "") {
+            if (p.sexo !== sexoActual) return false;
+        }
+        if (marcaSelect.value !== "") {
+            if (p.marca !== marcaSelect.value) return false;
+        }
+        if (buscador.value !== "") {
+            if (!p.nombre.toLowerCase().includes(buscador.value.toLowerCase())) return false;
+        }
+        return true;
+    });
+    lista.forEach(crearCard);
+}
+function crearCard(producto) {
+    const card = document.createElement("div");
+    card.className = "card";
+    let imagen = "";
+    if (producto.imagen == "") {
+        imagen = `
+        <div class="placeholder">
+        Imagen pendiente
+        </div>
+        `;
+    } else {
+        imagen = `
+        <img src="${producto.imagen}" alt="${producto.nombre}">
+        `;
+    }
+    card.innerHTML = `
+        ${imagen}
+        <div class="info">
+        <div class="nombre">
+        ${producto.nombre}
+        </div>
+        <div class="marca">
+        ${producto.marca}
+        </div>
+        <div class="stock">
+        Consultar stock
+        </div>
+        </div>
+    `;
+    const boton = document.createElement("button");
+    boton.textContent = "Agregar al carrito";
+    boton.onclick = () => agregar(producto);
+    card.appendChild(boton);
+    contenedor.appendChild(card);
+}
+function agregar(producto) {
+    if (!carrito.find(p => p.nombre === producto.nombre)) {
+        carrito.push(producto);
+    }
+    actualizarCarrito();
+}
+function actualizarCarrito() {
+    document.getElementById("cantidadProductos").textContent =
+        carrito.length + " perfumes agregados";
+}
+document.getElementById("consultarPedido").onclick = () => {
+    if (carrito.length == 0) {
+        alert("Agregá al menos un perfume.");
+        return;
+    }
+    let mensaje = "Hola Scent Parfums.%0A%0A";
+    mensaje += "Quisiera consultar disponibilidad de:%0A%0A";
+    carrito.forEach(p => {
+        mensaje += "• " + p.nombre + "%0A";
+    });
+    mensaje += "%0AMuchísimas gracias.";
+    window.open(
+        "https://wa.me/5493537572296?text=" + mensaje,
+        "_blank"
+    );
+};
+buscador.addEventListener("input", renderizar);
+marcaSelect.addEventListener("change", renderizar);
+document.querySelectorAll(".tab").forEach(tab => {
+    tab.onclick = () => {
+        document.querySelectorAll(".tab").forEach(t =>
+            t.classList.remove("active")
+        );
+        tab.classList.add("active");
+        categoriaActual = tab.dataset.tab;
+        renderizar();
+    };
+});
+document.querySelectorAll(".sexoBtn").forEach(btn => {
+    btn.onclick = () => {
+        document.querySelectorAll(".sexoBtn").forEach(b =>
+            b.classList.remove("active")
+        );
+        btn.classList.add("active");
+        sexoActual = btn.dataset.sexo;
+        renderizar();
+    };
+});
+iniciar();
