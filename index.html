@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Scent Parfums</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&family=Bricolage+Grotesque:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="hero">
+
+<div class="hero-overlay">
+
+<img id="logo" src="img/logo.png" alt="Scent Parfums">
+
+<h1>SCENT PARFUMS</h1>
+
+<p class="subtitle">
+Perfumes originales
+</p>
+
+<p class="categories">
+Diseñador • Árabe • Tester
+</p>
+
+<a href="#catalogo" class="btnPrincipal">
+EXPLORAR CATÁLOGO
+</a>
+
+</div>
+
+</header>
+
+<section class="busqueda">
+
+<div class="contenedor">
+
+<input
+type="text"
+id="buscar"
+placeholder="Buscar perfume...">
+
+<select id="marca">
+
+<option value="">Todas las marcas</option>
+
+</select>
+
+<div class="sexo">
+
+<button class="sexoBtn active" data-sexo="">
+Todos
+</button>
+
+<button class="sexoBtn" data-sexo="Masculino">
+Masculino
+</button>
+
+<button class="sexoBtn" data-sexo="Femenino">
+Femenino
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="catalogo">
+
+<div class="tabs">
+
+<button class="tab active" data-tab="Todos">
+Todos
+</button>
+
+<button class="tab" data-tab="Diseñador">
+Diseñador
+</button>
+
+<button class="tab" data-tab="Árabe">
+Árabe
+</button>
+
+<button class="tab" data-tab="Tester">
+Tester
+</button>
+
+</div>
+
+<div id="productos" class="gridProductos">
+
+</div>
+
+</section>
+
+<section class="carrito">
+
+<div class="carritoContenido">
+
+<div>
+
+<h2>Mi pedido</h2>
+
+<p id="cantidadProductos">
+0 perfumes agregados
+</p>
+
+</div>
+
+<button id="consultarPedido">
+Consultar pedido
+</button>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+
+© 2026 Scent Parfums
+
+</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
