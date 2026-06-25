@@ -4,135 +4,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Scent Parfums</title>
+
+    <link rel="stylesheet" href="style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&family=Bricolage+Grotesque:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=League+Spartan:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header class="hero">
+<header class="navbar">
 
-<div class="hero-overlay">
+    <div class="logo">
 
-<img id="logo" src="img/logo.png" alt="Scent Parfums">
+        <img id="logo" src="img/logo.png" alt="Scent Parfums">
 
-<h1>SCENT PARFUMS</h1>
+        <span>SCENT PARFUMS</span>
 
-<p class="subtitle">
-Perfumes originales
-</p>
+    </div>
 
-<p class="categories">
-Diseñador • Árabe • Tester
-</p>
+    <nav>
 
-<a href="#catalogo" class="btnPrincipal">
-EXPLORAR CATÁLOGO
-</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#carrito">Carrito</a>
 
-</div>
+    </nav>
 
 </header>
 
-<section class="busqueda">
+<section class="hero">
 
-<div class="contenedor">
+    <div class="hero-text">
 
-<input
-type="text"
-id="buscar"
-placeholder="Buscar perfume...">
+        <h1>Perfumes originales</h1>
 
-<select id="marca">
+        <p>
+            Diseñador • Árabe • Tester
+        </p>
 
-<option value="">Todas las marcas</option>
+        <a href="#catalogo" class="btnPrincipal">
 
-</select>
+            EXPLORAR CATÁLOGO
 
-<div class="sexo">
+        </a>
 
-<button class="sexoBtn active" data-sexo="">
-Todos
-</button>
+    </div>
 
-<button class="sexoBtn" data-sexo="Masculino">
-Masculino
-</button>
+</section>
 
-<button class="sexoBtn" data-sexo="Femenino">
-Femenino
-</button>
+<section class="filtros">
 
-</div>
+    <input
+        id="buscar"
+        type="text"
+        placeholder="Buscar perfume...">
 
-</div>
+    <select id="marca">
+
+        <option value="">Todas las marcas</option>
+
+    </select>
+
+    <div class="tabs">
+
+        <button class="tab active" data-tab="Todos">Todos</button>
+
+        <button class="tab" data-tab="Diseñador">Diseñador</button>
+
+        <button class="tab" data-tab="Árabe">Árabe</button>
+
+        <button class="tab" data-tab="Tester">Tester</button>
+
+    </div>
 
 </section>
 
 <section id="catalogo">
 
-<div class="tabs">
-
-<button class="tab active" data-tab="Todos">
-Todos
-</button>
-
-<button class="tab" data-tab="Diseñador">
-Diseñador
-</button>
-
-<button class="tab" data-tab="Árabe">
-Árabe
-</button>
-
-<button class="tab" data-tab="Tester">
-Tester
-</button>
-
-</div>
-
-<div id="productos" class="gridProductos">
-
-</div>
+    <div id="productos" class="grid"></div>
 
 </section>
 
-<section class="carrito">
+<section id="catalogo" class="catalogo">
 
-<div class="carritoContenido">
+    <div class="catalogo-header">
 
-<div>
+        <div>
 
-<h2>Mi pedido</h2>
+            <h2>Nuestro catálogo</h2>
 
-<p id="cantidadProductos">
-0 perfumes agregados
-</p>
+            <p id="contadorProductos">
+                Cargando perfumes...
+            </p>
 
-</div>
+        </div>
 
-<button id="consultarPedido">
-Consultar pedido
-</button>
+    </div>
 
-</div>
+    <div id="productos" class="gridProductos">
+
+        <!-- Los productos se cargarán automáticamente desde productos.json -->
+
+    </div>
+
+</section>
+
+<section id="carrito" class="carrito">
+
+    <div class="carritoContenido">
+
+        <div>
+
+            <h2>Mi pedido</h2>
+
+            <p id="cantidadProductos">
+                0 perfumes agregados
+            </p>
+
+        </div>
+
+        <button id="consultarPedido">
+
+            Consultar pedido
+
+        </button>
+
+    </div>
 
 </section>
 
 <footer>
 
-<p>
+    <div class="footerContenido">
 
-© 2026 Scent Parfums
+        <img src="img/logo.png" alt="Scent Parfums">
 
-</p>
+        <h3>SCENT PARFUMS</h3>
+
+        <p>
+
+            Perfumes originales<br>
+
+            Diseñador • Árabe • Tester
+
+        </p>
+
+        <small>
+
+            © 2026 Scent Parfums
+
+        </small>
+
+    </div>
 
 </footer>
 
@@ -140,4 +166,37 @@ Consultar pedido
 
 </body>
 
+</html>
+
+<section id="carrito" class="carrito">
+
+    <div>
+
+        <h2>Mi pedido</h2>
+
+        <p id="cantidadProductos">
+
+            0 perfumes
+
+        </p>
+
+    </div>
+
+    <button id="consultarPedido">
+
+        Consultar pedido
+
+    </button>
+
+</section>
+
+<footer>
+
+    © 2026 Scent Parfums
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
 </html>
